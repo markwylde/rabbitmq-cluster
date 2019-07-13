@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  rabbit-bootstrap:
+    image: markwylde/rabbitmq
+    hostname: rabbit-bootstrap
+    environment:
+      - ADMIN_USERNAME=myuser
+      - ADMIN_PASSWORD=mypass
+      - CLUSTER_SECRET=w89240tygiwuvb
+
+  rabbit:
+    image: markwylde/rabbitmq
+    deploy:
+      replicas: 5
+    depends_on:
+      - rabbit-bootstrap
+    environment:
+     - CLUSTER_BOOTSTRAP=rabbit-bootstrap
+     - CLUSTER_SECRET=w89240tygiwuvb
+     - RAM_NODE=true
+    ports:
+      - "5672:5672"
+      - "15672:15672"
