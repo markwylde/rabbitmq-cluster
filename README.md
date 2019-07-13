@@ -17,7 +17,7 @@ version: "3.7"
 
 services:
   rabbit-bootstrap:
-    image: markwylde/rabbitmq
+    image: markwylde/rabbitmq-cluster
     hostname: rabbit-bootstrap
     environment:
       - ADMIN_USERNAME=myuser
@@ -25,7 +25,7 @@ services:
       - CLUSTER_SECRET=w89240tygiwuvb
 
   rabbit:
-    image: markwylde/rabbitmq
+    image: markwylde/rabbitmq-cluster
     deploy:
       replicas: 2
     depends_on:
