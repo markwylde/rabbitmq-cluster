@@ -27,7 +27,7 @@ services:
   rabbit:
     image: markwylde/rabbitmq
     deploy:
-      replicas: 5
+      replicas: 2
     depends_on:
       - rabbit-bootstrap
     environment:
@@ -48,3 +48,11 @@ docker stack deploy -c docker-compose.yml rabbit
 You should now be able to navigate to the admin UI.
 
 http://192.168.99.100:15672/
+
+### Scaling Nodes
+You can now scale up to as many services as you want
+at any time:
+
+```bash
+docker service scale rabbit_rabbit=5
+```
